@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: application-review
+  liquibase:
+    change-log: classpath:/db/changelog/master.xml
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/wallet_service?useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8&useSSL=false}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:admin123}
+    hikari:
+      maximum-pool-size: 10
+      pool-name: Hikari
+      auto-commit: false
+    type: com.zaxxer.hikari.HikariDataSource
+  jpa:
+    show-sql: false
+    open-in-view: false
+    properties:
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      hibernate.jdbc.time_zone: UTC
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.jdbc.batch_size: 25
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.query.fail_on_pagination_over_collection_fetch: true
+      hibernate.query.in_clause_parameter_padding: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
