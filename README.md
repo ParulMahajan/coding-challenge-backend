@@ -13,7 +13,7 @@ The software stores the data in a data base and generates a document, so the app
 
 ``` bash
 # Build project
-mvn clean install -DskipTests
+mvn clean install
 
 # Build image
 docker build -t applicant-service .

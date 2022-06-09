@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 echo "Build applicant service"
-mvn clean install -DskipTests
+mvn clean install
 
 echo "Build docker image"
 docker build -t applicant-service .
