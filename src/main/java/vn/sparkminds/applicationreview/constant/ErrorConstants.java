@@ -7,5 +7,5 @@ public final class ErrorConstants {
 
     public static final String PROBLEM_BASE_URL = "https://application-review/problem";
     public static final URI NOT_FOUND = URI.create(PROBLEM_BASE_URL + "/not-found");
-    public static final URI EMAIL_ALREADY_USED_TYPE = URI.create(PROBLEM_BASE_URL + "/email-already-used");
+    public static final URI BAD_REQUEST = URI.create(PROBLEM_BASE_URL + "/bad-request");
 }
