@@ -268,7 +268,7 @@ class ApplicantControllerTest {
     }
 
     @Test
-    @Order(16)
+    @Order(16) // This case must be run at last, cause need to delete all data
     void willReturnNoContentWhenGetAllApplicantProfilePdf() throws Exception {
         projectRepository.deleteAll();
         applicantRepository.deleteAll();
