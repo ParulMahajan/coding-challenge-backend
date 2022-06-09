@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,13 +36,6 @@ public class ApplicantController {
     @PostMapping(consumes = "application/json", produces = "application/api-v1+json")
     public ResponseEntity<Applicant> createApplicant(@Valid @RequestBody ApplicantDto request) {
         return ResponseEntity.ok(applicantService.createApplicant(request));
-    }
-
-    @PutMapping(value = "/{applicantId}", consumes = "application/json", produces = "application/api-v1+json")
-    public ResponseEntity<?> updateApplicant(@PathVariable Long applicantId,
-                                             @Valid @RequestBody ApplicantDto request) {
-        applicantService.updateApplicant(applicantId, request);
-        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{applicantId}", produces = "application/api-v1+json")

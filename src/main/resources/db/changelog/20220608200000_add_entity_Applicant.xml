@@ -15,7 +15,10 @@
             <column name="name" type="varchar(100)">
                 <constraints nullable="false" />
             </column>
-            <column name="github_url" type="varchar(500)"/>
+            <column name="github_user" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>

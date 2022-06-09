@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sparkminds.applicationreview.entity.Applicant;
 import vn.sparkminds.applicationreview.entity.Project;
-import vn.sparkminds.applicationreview.exception.EmailAlreadyUsedException;
 import vn.sparkminds.applicationreview.exception.ResourceNotFoundException;
 import vn.sparkminds.applicationreview.repository.ApplicantRepository;
 import vn.sparkminds.applicationreview.repository.ProjectRepository;
@@ -47,31 +46,23 @@ public class ApplicantServiceImpl implements ApplicantService {
     @Override
     @Transactional
     public Applicant createApplicant(ApplicantDto request) {
+        deleteOldApplicantIfExistByEmail(request.getEmail());
+
         Applicant applicant = applicantMapper.toEntity(request);
         List<Project> projects = projectMapper.toEntity(request.getProjects());
-
-        if (applicantRepository.existsByEmail(applicant.getEmail())) {
-            throw new EmailAlreadyUsedException();
-        }
-
         projects.forEach(project -> project.setApplicant(applicant));
         applicant.setProjects(projects);
 
         return applicantRepository.save(applicant);
     }
 
-    @Override
-    @Transactional
-    public void updateApplicant(Long applicantId, ApplicantDto request) {
-        Applicant applicant = getApplicant(applicantId);
-        List<Project> newProjects = projectMapper.toEntity(request.getProjects());
-
-        projectRepository.deleteAll(applicant.getProjects());
-
-        applicant.setName(request.getName());
-        applicant.setGithubUrl(request.getGithubUrl());
-        newProjects.forEach(project -> project.setApplicant(applicant));
-        applicant.setProjects(newProjects);
+    private void deleteOldApplicantIfExistByEmail(String applicantEmail) {
+        applicantRepository.findByEmail(applicantEmail).ifPresent(applicant -> {
+            projectRepository.deleteAll(applicant.getProjects());
+            applicantRepository.delete(applicant);
+            projectRepository.flush();
+            applicantRepository.flush();
+        });
     }
 
     @Override
