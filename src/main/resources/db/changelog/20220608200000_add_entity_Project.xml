@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="20220608200000-1" author="parulmahajan">
+        <createTable tableName="project">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="employment_mode" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="capacity" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="duration_in_months" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="start_year" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="role" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="team_size" type="int">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="repository_url" type="varchar(500)"/>
+            <column name="live_url" type="varchar(500)"/>
+
+            <column name="fk_applicant_id" type="bigint"/>
+
+            <!-- Audit columns -->
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp(6)"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp(6)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20220608200000-2" author="parulmahajan">
+        <addForeignKeyConstraint baseColumnNames="fk_applicant_id"
+                                 baseTableName="project"
+                                 constraintName="fk_applicant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="applicant"/>
+    </changeSet>
+
+</databaseChangeLog>
