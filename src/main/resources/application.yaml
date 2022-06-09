@@ -7,7 +7,7 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/master.xml
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/wallet_service?useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8&useSSL=false}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/applicant_service?useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8&useSSL=false}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:admin123}
     hikari:
