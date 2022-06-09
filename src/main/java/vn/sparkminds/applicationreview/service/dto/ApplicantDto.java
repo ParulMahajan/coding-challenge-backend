@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -16,6 +17,7 @@ public class ApplicantDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotBlank(message = "The email is required")
+    @Email(message = "The email is invalid format")
     @Size(max = 100, message = "The email is over maximum length")
     private String email;
 
