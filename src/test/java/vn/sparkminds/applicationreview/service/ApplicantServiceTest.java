@@ -43,10 +43,7 @@ class ApplicantServiceTest {
     private void setUp() {
         applicantMapper = new ApplicantMapperImpl();
         projectMapper = new ProjectMapperImpl();
-        applicantService = new ApplicantServiceImpl(
-                applicantRepository, projectRepository,
-                applicantMapper, projectMapper
-        );
+        applicantService = new ApplicantServiceImpl(applicantRepository, applicantMapper, projectMapper);
 
         testData = new Applicant();
         testData.setId(1L);
@@ -83,7 +80,6 @@ class ApplicantServiceTest {
         applicantService.createApplicant(testDto);
 
         verify(applicantRepository).delete(testData);
-        verify(projectRepository).deleteAll(testData.getProjects());
 
         ArgumentCaptor<Applicant> applicantArgumentCaptor = ArgumentCaptor.forClass(Applicant.class);
         verify(applicantRepository).save(applicantArgumentCaptor.capture());
@@ -98,7 +94,6 @@ class ApplicantServiceTest {
     void canDeleteApplicant() {
         when(applicantRepository.findById(1L)).thenReturn(Optional.of(testData));
         applicantService.deleteApplicant(1L);
-        verify(projectRepository).deleteAll(testData.getProjects());
         verify(applicantRepository).delete(testData);
     }
 

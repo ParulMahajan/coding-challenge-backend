@@ -8,7 +8,6 @@ import vn.sparkminds.applicationreview.entity.Applicant;
 import vn.sparkminds.applicationreview.entity.Project;
 import vn.sparkminds.applicationreview.exception.ResourceNotFoundException;
 import vn.sparkminds.applicationreview.repository.ApplicantRepository;
-import vn.sparkminds.applicationreview.repository.ProjectRepository;
 import vn.sparkminds.applicationreview.service.ApplicantService;
 import vn.sparkminds.applicationreview.service.dto.ApplicantDto;
 import vn.sparkminds.applicationreview.service.mapper.ApplicantMapper;
@@ -24,7 +23,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 
     /** Repositories */
     private final ApplicantRepository applicantRepository;
-    private final ProjectRepository projectRepository;
 
     /** Mappers */
     private final ApplicantMapper applicantMapper;
@@ -50,17 +48,14 @@ public class ApplicantServiceImpl implements ApplicantService {
 
         Applicant applicant = applicantMapper.toEntity(request);
         List<Project> projects = projectMapper.toEntity(request.getProjects());
-        projects.forEach(project -> project.setApplicant(applicant));
-        applicant.setProjects(projects);
+        applicant.addProjects(projects);
 
         return applicantRepository.save(applicant);
     }
 
     private void deleteOldApplicantIfExistByEmail(String applicantEmail) {
         applicantRepository.findByEmail(applicantEmail).ifPresent(applicant -> {
-            projectRepository.deleteAll(applicant.getProjects());
             applicantRepository.delete(applicant);
-            projectRepository.flush();
             applicantRepository.flush();
         });
     }
@@ -69,7 +64,6 @@ public class ApplicantServiceImpl implements ApplicantService {
     @Transactional
     public void deleteApplicant(Long applicantId) {
         Applicant applicant = getApplicant(applicantId);
-        projectRepository.deleteAll(applicant.getProjects());
         applicantRepository.delete(applicant);
     }
 
