@@ -30,6 +30,9 @@ Quick deploy by run the script `local-deploy.sh`
 ## Api - Document
 The Swagger UI page will then be available at `http://localhost:8085/swagger-ui/index.html`
 
+## AWS Hosting
+The application is already hosted on AWS, you can access the application at `http://ec2-54-151-164-118.ap-southeast-1.compute.amazonaws.com:8085/swagger-ui/index.html#/`
+
 ## License
 
 We have licensed this project under the MIT license so that you may use this for a portfolio piece (or anything else!).
