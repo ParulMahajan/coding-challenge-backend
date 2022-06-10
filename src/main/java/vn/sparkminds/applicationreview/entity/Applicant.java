@@ -41,7 +41,7 @@ public class Applicant extends AbstractAuditingEntity implements Serializable {
     @Column(name = "github_user", length = 100, nullable = false)
     private String githubUser;
 
-    @OneToMany(mappedBy = "applicant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "applicant", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Project> projects;
 
     public void addProject(Project project) {
