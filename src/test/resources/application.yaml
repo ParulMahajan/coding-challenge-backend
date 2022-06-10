@@ -1,20 +1,14 @@
-server:
-  port: 8085
-
 spring:
-  application:
-    name: application-review
   liquibase:
-    change-log: classpath:/db/changelog/master.xml
+    enabled: false
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/applicant_service?useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8&useSSL=false}
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:admin123}
-    hikari:
-      maximum-pool-size: 10
-      pool-name: Hikari
-      auto-commit: false
     type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:applicant_service;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username:
+    password:
+    hikari:
+      auto-commit: false
+    driver-class-name: org.h2.Driver
   jpa:
     show-sql: false
     open-in-view: false
@@ -32,7 +26,7 @@ spring:
       hibernate.query.fail_on_pagination_over_collection_fetch: true
       hibernate.query.in_clause_parameter_padding: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy

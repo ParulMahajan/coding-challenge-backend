@@ -13,7 +13,5 @@ public interface ApplicantService {
 
     Applicant createApplicant(ApplicantDto request);
 
-    void updateApplicant(Long applicantId, ApplicantDto request);
-
     void deleteApplicant(Long applicantId);
 }

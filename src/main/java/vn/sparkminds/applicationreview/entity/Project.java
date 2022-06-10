@@ -67,4 +67,24 @@ public class Project extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(name = "fk_applicant_id", nullable = false)
     @JsonIgnore
     private Applicant applicant;
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "createdBy='" + createdBy + '\'' +
+                ", createdDate=" + createdDate +
+                ", lastModifiedBy='" + lastModifiedBy + '\'' +
+                ", lastModifiedDate=" + lastModifiedDate +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", employmentMode=" + employmentMode +
+                ", capacity=" + capacity +
+                ", durationInMonths=" + durationInMonths +
+                ", startYear=" + startYear +
+                ", role='" + role + '\'' +
+                ", teamSize=" + teamSize +
+                ", repositoryUrl='" + repositoryUrl + '\'' +
+                ", liveUrl='" + liveUrl + '\'' +
+                '}';
+    }
 }

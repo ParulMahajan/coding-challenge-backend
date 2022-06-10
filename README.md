@@ -1,67 +1,37 @@
 # AM Coding Challenge - Backend (Java)
 
-## The case study: Application review
+## Application review
 
 Reviewing applications is one of the key activities, when starting a new project.
 To takle that challenge, BP ACCELERATOR Inc. wants to provide an API, via which applicant can hand in their application with past project experience.
 
 The software stores the data in a data base and generates a document, so the application can be reviewed by the HR department
 
-## Product Requirements
+## Build Setup
+- Java version 11
+- Docker and docker-compose
 
-As an applicant at BP ACCELERATOR Inc.,
+``` bash
+# Build project
+mvn clean package
 
-- [ ] I want to provide my application via a REST-API, with the following data:
-  - [ ] my work e-mail address
-  - [ ] a name
-  - [ ] a github user
-  - [ ] past projects (min 1)
-- [ ] for each past project I want to provide
-  - [ ] name of the project
-  - [ ] employment mode (options: freelance / employed)
-  - [ ] capacity (options: part-time / full-time)
-  - [ ] duration in months (allow to provide weeks)
-  - [ ] start year
-  - [ ] role
-  - [ ] team size (number)
-  - [ ] link to the repository (optional)
-  - [ ] link to the live url (optional)
+# Build image
+docker build -t applicant-service .
 
-As an application reviewer at BP ACCELERATOR Inc.,
+# Deploy with docker-compose
+docker-compose build && docker-compose up -d
+```
 
-- [ ] I want to see an overview of all applications in the database
-- [ ] I want that when new data for an e-mail address is provided, all old data is automatically deleted
-- [ ] I want to easily generate and download a PDF document, that lists the data provided from the applicant
-  - [ ] the PDF contains the GitHub profile image of the applicant ([API](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api))
+Quick deploy by run the script `local-deploy.sh`
+``` bash
+./local-deploy.sh
+```
 
-## Your Mission
+## Api - Document
+The Swagger UI page will then be available at `http://localhost:8085/swagger-ui/index.html`
 
-Create a Java backend application that satisfies all must-have requirements above, plus any nice-to-have requirements you wish to include.
-
-For that, you'll need to provide a REST-API, set up a database and generate a PDF document, that contains the applicants data.
-
-You can use any boilerplate/approach you prefer, but try to keep it simple. We encourage you to use your favorite tools and packages to build a solid web application.
-
-You don't have to host your service publicly, but feel free to do that.
-Please include a description in the README.md how to run the project locally and provide us a well done description for the API.
-
-The final delivery must be running with Docker.
-
-## Tech Requirements
-
-- Use the LTS version of Java 11 or 17
-- Run the generation of the pdf in another Thread
-
-## Instructions
-
-- Fork this repo
-- The challenge is on!
-- Build a performant, clean and well-structured solution
-- Commit early and often. We want to be able to check your progress
-- Please complete your working solution within 2 days of receiving this challenge, and be sure to notify us with a link to your repo, when it is ready for review.
-- additionally to the solution, please hand-in the PDF document, filled with your actual project experience
-
-**Happy coding!**
+## AWS Hosting
+The application is already hosted on AWS, you can access the application at `http://ec2-54-151-164-118.ap-southeast-1.compute.amazonaws.com:8085/swagger-ui/index.html#/`
 
 ## License
 
