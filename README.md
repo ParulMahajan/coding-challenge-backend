@@ -13,7 +13,7 @@ The software stores the data in a data base and generates a document, so the app
 
 ``` bash
 # Build project
-mvn clean install
+mvn clean package
 
 # Build image
 docker build -t applicant-service .
@@ -28,7 +28,7 @@ Quick deploy by run the script `local-deploy.sh`
 ```
 
 ## Api - Document
-The Swagger UI page will then be available at `http://localhost:8080/swagger-ui/index.html`
+The Swagger UI page will then be available at `http://localhost:8085/swagger-ui/index.html`
 
 ## License
 
